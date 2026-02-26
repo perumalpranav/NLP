@@ -22,13 +22,16 @@ def get_data(path: str) -> List[Dict[str, Union[str, int]]]:
 
     return dictlist
 
+
+# --- Dataset Class (mirrors hw2Sandbox) ---
 class SarcasmDataset(Dataset):
     def __init__(self, data: List[Dict], featurizer, feature_mode):
         """
         Args:
             data: List of dictionaries (from get_data)
             featurizer: Instance of TextFeaturizer
-            feature_mode: Callable (e.g. featurizer.to_word2vec) used to convert a headline string into a feature vector
+            feature_mode: Callable (e.g. featurizer.to_word2vec) used to
+                          convert a headline string into a feature vector
         """
         self.data = data
         self.featurizer = featurizer
@@ -51,6 +54,7 @@ class SarcasmDataset(Dataset):
             "features": features,
             "label": label,
         }
+
 
 class TextFeaturizer:
     def __init__(self, corpus: List[str], w2v_path: str = "GoogleNews-vectors-negative300.bin"):
@@ -155,65 +159,83 @@ class SarcasmMLP(nn.Module):
 
 
 def train_loop(
-    model: nn.Module, 
-    X: np.ndarray, 
-    y: np.ndarray, 
-    lr: float, 
-    epochs: int
+    model: nn.Module,
+    dataloader: DataLoader,
+    device: torch.device,
+    lr: float,
+    epochs: int,
 ) -> Tuple[List[float], List[float]]:
     """
     Returns: loss_history, acc_history
     """
-    x_tensor = torch.FloatTensor(X)
-    y_tensor = torch.LongTensor(y)
-    
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=lr)
-    
+
+    model.to(device)
+    model.train()
+
     loss_history: List[float] = []
     acc_history: List[float] = []
-    
-    # TODO: Implement Training Loop
-    # 1. Forward pass
-    # 2. Calculate loss
-    # 3. Backward pass & Optimizer step
-    # 4. Calculate Accuracy
 
     for e in range(epochs):
-        outputs = model(x_tensor)
+        epoch_loss = 0.0
+        correct = 0
+        total = 0
 
-        loss = criterion(outputs, y_tensor)
+        for batch in dataloader:
+            features = batch["features"].to(device)
+            labels = batch["label"].to(device).squeeze()
 
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step() 
+            # Forward pass
+            outputs = model(features)
+            loss = criterion(outputs, labels)
+            epoch_loss += loss.item()
 
-        preds = torch.argmax(outputs, dim=1)
-        correct = (preds == y_tensor).sum().item()
-        accuracy = correct / y_tensor.size(0)
+            # Backward pass & optimizer step
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
 
-        loss_history.append(loss.item())
+            # Accumulate accuracy stats
+            preds = torch.argmax(outputs, dim=1)
+            correct += (preds == labels).sum().item()
+            total += labels.size(0)
+
+        avg_loss = epoch_loss / len(dataloader)
+        accuracy = correct / total
+
+        loss_history.append(avg_loss)
         acc_history.append(accuracy)
 
-        print(f"Epoch {e}: Accuracy = {accuracy}")
+        print(f"Epoch {e + 1}/{epochs} - Loss: {avg_loss:.4f} | Accuracy: {accuracy:.4f}")
 
-    
     return loss_history, acc_history
 
 
 if __name__ == "__main__":
     print("--- Starting Assignment Execution ---")
-    
+
+    # Fixed seed for reproducibility (consistent with hw2Sandbox)
+    SEED = 42
+    torch.manual_seed(SEED)
+    np.random.seed(SEED)
+
+    # Device (consistent with hw2Sandbox)
+    device = torch.device(
+        "cuda" if torch.cuda.is_available()
+        else "mps" if torch.backends.mps.is_available()
+        else "cpu"
+    )
+    print(f"Using device: {device}")
+
     # 1. Load Data
     try:
         print("Loading data...")
-        # Ensure these files exist in your directory
         train_data = get_data('train.jsonl')
         valid_data = get_data('valid.jsonl')
-        
+
         train_corpus = [str(d['headline']) for d in train_data]
-        train_labels = [int(d['is_sarcastic']) for d in train_data]
-        print(f"Loaded {len(train_data)} training samples.")      
+        print(f"Loaded {len(train_data)} training samples.")
     except NotImplementedError:
         print("Error: You must implement get_data first.")
         exit(1)
@@ -221,55 +243,78 @@ if __name__ == "__main__":
         print("Error: Data files not found.")
         exit(1)
 
-    # 2. Setup Features
+    # 2. Setup Featurizer
     try:
         # Note: DO NOT change the w2v_path. The .bin file must be placed at the top-level directory.
         featurizer = TextFeaturizer(train_corpus, w2v_path="GoogleNews-vectors-negative300.bin")
-        
+
         # --- SELECT FEATURE MODE HERE ---
-        feature_mode = featurizer.to_word2vec  # Change this to to_one_hot or to_word2vec as needed
-        
-        x_train = np.array([feature_mode(text) for text in train_corpus])
-        y_train = np.array(train_labels)
-        
+        feature_mode = featurizer.to_word2vec  # Change to to_one_hot or to_bow as needed
+
     except NotImplementedError as e:
         print(f"\nError: {e}")
         exit(1)
 
-    # 3. Initialize Model
-    input_dim = x_train.shape[1]
+    # 3. Build Datasets & DataLoaders (mirrors hw2Sandbox)
+    try:
+        train_dataset = SarcasmDataset(train_data, featurizer, feature_mode)
+        valid_dataset = SarcasmDataset(valid_data, featurizer, feature_mode)
+
+        batch_size = 8  # Change batch size if needed
+
+        # DO NOT CHANGE THE FOLLOWING LINES
+        if int(os.environ.get("GS_TESTING_BATCH_SIZE", "0")) > 0:
+            batch_size = int(os.environ["GS_TESTING_BATCH_SIZE"])
+        # END OF DO NOT CHANGE
+
+        # generator with fixed seed ensures consistent shuffling across runs
+        generator = torch.Generator()
+        generator.manual_seed(SEED)
+
+        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, generator=generator)
+        valid_loader = DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+    except Exception as e:
+        print(f"Error initializing datasets: {e}")
+        exit(1)
+
+    # 4. Initialize Model
+    # Determine input_dim from a single sample
+    sample_features = train_dataset[0]["features"]
+    input_dim = sample_features.shape[0]
+
     hidden_dims: List[int] = [128, 64]  # TODO: Define hidden layer sizes (for example [128, 64] meaning two hidden layers with 128 and 64 units)
     output_dim: int = 2  # TODO: Define the dimension of the output layer (number of classes)
+
     try:
         model = SarcasmMLP(input_dim, hidden_dims, output_dim)
     except NotImplementedError as e:
         print(f"\nError: {e}")
         exit(1)
 
-    # 4. Train
+    # 5. Train
     print("\n--- Training Start ---")
     learning_rate: float = 0.001  # TODO: Define learning rate
     num_epochs: int = 50  # TODO: Define number of epochs
+
     try:
-        losses, accs = train_loop(model, x_train, y_train, lr=learning_rate, epochs=num_epochs)
+        losses, accs = train_loop(model, train_loader, device, lr=learning_rate, epochs=num_epochs)
         print(f"Final Training Loss: {losses[-1]:.4f}")
-        print(f"Final Training Accuracy: {accs[-1]*100:.2f}%")
+        print(f"Final Training Accuracy: {accs[-1] * 100:.2f}%")
     except NotImplementedError as e:
         print(f"\nError: {e}")
         exit(1)
 
-    # 5. Prediction (DO NOT MODIFY)
+    # 6. Prediction (DO NOT MODIFY structure — mirrors hw2Sandbox)
     print("\n--- Generating Predictions ---")
     try:
-        valid_data = get_data('valid.jsonl')
-        valid_corpus = [str(d['headline']) for d in valid_data]
-        x_valid = np.array([feature_mode(text) for text in valid_corpus])
-        x_valid_tensor = torch.FloatTensor(x_valid)
-        
         model.eval()
+        predictions = []
         with torch.no_grad():
-            logits = model(x_valid_tensor)
-            predictions = torch.argmax(logits, dim=1).numpy()
+            for batch in valid_loader:
+                features = batch["features"].to(device)
+                logits = model(features)
+                predictions.extend(torch.argmax(logits, dim=1).cpu().numpy())
+        predictions = np.array(predictions)
 
         output_path = "prediction.jsonl"
         with open(output_path, "w") as f:
@@ -279,20 +324,19 @@ if __name__ == "__main__":
                     "prediction": int(pred)
                 }
                 f.write(json.dumps(record) + "\n")
+
+        true_valid = np.array([d['is_sarcastic'] for d in valid_data], dtype=int)
+        true_accuracy = (true_valid == predictions).sum() / len(true_valid)
+        print(f"Test Accuracy: {true_accuracy}")
     except Exception as e:
         print(f"Error during prediction generation: {e}")
 
-    true_valid = np.array([d['is_sarcastic'] for d in valid_data], dtype=int)
-    correct = (true_valid == predictions).sum()
-    true_accuracy = correct / len(true_valid)
-    print(f"Test Accuracy: {true_accuracy}")
-
-    # 6. Graphs
+    # 7. Graphs
     print("\n--- Creating Graphs ---")
-    epochs = range(num_epochs)
+    epoch_range = range(1, num_epochs + 1)
 
-    plt.figure(figsize=(12,6))
-    plt.plot(epochs, losses, marker='o', color='blue', label='Training Loss')
+    plt.figure(figsize=(12, 6))
+    plt.plot(epoch_range, losses, marker='o', color='blue', label='Training Loss')
     plt.xlabel("Epochs")
     plt.ylabel("Loss")
     plt.title("Training Loss vs Epochs (Word2Vec)")
