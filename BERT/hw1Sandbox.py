@@ -57,7 +57,7 @@ class SarcasmDataset(Dataset):
 
 
 class TextFeaturizer:
-    def __init__(self, corpus: List[str], w2v_path: str = "GoogleNews-vectors-negative300.bin"):
+    def __init__(self, corpus: List[str], w2v_path: str = "../MLP/GoogleNews-vectors-negative300.bin"):
         # The pre-trained Word2Vec model is available at:
         # https://app.box.com/s/tpmoeke56fimcbpcrdm4lvbphsjxzlc9
 
@@ -245,11 +245,10 @@ if __name__ == "__main__":
 
     # 2. Setup Featurizer
     try:
-        # Note: DO NOT change the w2v_path. The .bin file must be placed at the top-level directory.
-        featurizer = TextFeaturizer(train_corpus, w2v_path="GoogleNews-vectors-negative300.bin")
+        featurizer = TextFeaturizer(train_corpus, w2v_path="../MLP/GoogleNews-vectors-negative300.bin")
 
         # --- SELECT FEATURE MODE HERE ---
-        feature_mode = featurizer.to_word2vec  # Change to to_one_hot or to_bow as needed
+        feature_mode = featurizer.to_one_hot  # Change to to_one_hot or to_bow as needed
 
     except NotImplementedError as e:
         print(f"\nError: {e}")
@@ -339,7 +338,7 @@ if __name__ == "__main__":
     plt.plot(epoch_range, losses, marker='o', color='blue', label='Training Loss')
     plt.xlabel("Epochs")
     plt.ylabel("Loss")
-    plt.title("Training Loss vs Epochs (Word2Vec)")
+    plt.title("Training Loss vs Epochs (One Hot)")
 
     plt.xticks(np.arange(0, 51, 1))
     plt.yticks(np.arange(0, 1.0, 0.1))

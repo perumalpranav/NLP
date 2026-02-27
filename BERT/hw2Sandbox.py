@@ -134,6 +134,11 @@ if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
     print(f"Using device: {device}")
 
+    # Fixed seed for reproducibility (consistent with hw1Sandbox)
+    SEED = 42
+    torch.manual_seed(SEED)
+    np.random.seed(SEED)
+
     # 1. Load Data
     try:
         train_data = get_data('train.jsonl')
@@ -162,7 +167,11 @@ if __name__ == "__main__":
             batch_size = int(os.environ["GS_TESTING_BATCH_SIZE"])
         # END OF DO NOT CHANGE
 
-        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+        # generator with fixed seed ensures consistent shuffling across runs
+        generator = torch.Generator()
+        generator.manual_seed(SEED)
+
+        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, generator=generator)
         valid_loader = DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
     except Exception as e:
         print(f"Error initializing datasets: {e}")
