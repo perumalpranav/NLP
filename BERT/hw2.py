@@ -54,7 +54,7 @@ class SarcasmDataset(Dataset):
 
         input_ids = encoded["input_ids"].squeeze(0)
         attention_mask = encoded["attention_mask"].squeeze(0)
-        label = torch.tensor([item['is_sarcastic']], dtype=torch.long)
+        label = torch.tensor(item['is_sarcastic'], dtype=torch.long)
 
         return {
             "input_ids": input_ids,
