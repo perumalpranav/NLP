@@ -18,6 +18,64 @@ Your Task
 Use a parsing library of your choice (e.g. SpaCy, Stanza), and justify them
 """
 
+from nltk import Tree
+import spacy
+
+nlp = spacy.load("en_core_web_sm")
+
+def cfg_tree_depth(parse_string):
+    """
+    Computes maximum depth of a CFG constituency parse tree
+    """
+    tree = Tree.fromstring(parse_string)
+    return tree.height()
+
+def subject_verb_distance(sentence):
+    """
+    Compute distance between subject and root verb
+    """
+    doc = nlp(sentence)
+
+    for token in doc:
+        if token.dep_ == "ROOT" and token.pos_ == "VERB":
+            verb = token
+
+            for child in token.children:
+                if child.dep_ in ["nsubj", "nsubjpass"]:
+                    return abs(verb.i - child.i)
+
+    return None
+
+def dependency_tree_depth(sentence):
+    doc = nlp(sentence)
+
+    def subtree_depth(token):
+        if not list(token.children):
+            return 1
+        return 1 + max(subtree_depth(child) for child in token.children)
+
+    roots = [token for token in doc if token.dep_ == "ROOT"]
+
+    if not roots:
+        return 0
+
+    return subtree_depth(roots[0])
+
+
+
+import torch
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from sentence_transformers import SentenceTransformer
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
+models = {
+    "bert_encoder": "textattack/bert-base-uncased-SST-2",
+    "roberta_encoder": "roberta-base",
+    "gpt2_decoder": "gpt2",
+    "mlp_embedding": "sentence-transformers/all-MiniLM-L6-v2"
+}
+
 #Create Data Flow for Pertrubations
 """
 Use metrics to show increase in complexity
@@ -39,7 +97,151 @@ Original: “Purdue University announced a new contract with DoD.”
 – Perturbed: “Purdue University, a public research university in West Lafayette, announced a new contract with DoD.”
 """
 
+# flat NP pattern: (NP (DT x) (JJ adj) (NN noun))
+_FLAT_NP = re.compile(r"\(NP \(\w+ \w+\) \(JJ (\w+)\) \((NNS?) (\w+)\)\)")
+ 
+
+def perturb_adj_to_relative(record: dict, field: str = "sentence1") -> str:
+    sentence = record[field]
+    parse    = record[field + "_parse"]
+ 
+    # Only search the portion of the parse before the first PP subtree
+    pp_start = parse.find("(PP ")
+    search_zone = parse[:pp_start] if pp_start != -1 else parse
+ 
+    match = _FLAT_NP.search(search_zone)
+    if not match:
+        return sentence
+ 
+    adj, tag, noun = match.group(1), match.group(2), match.group(3)
+    pronoun = "which" if tag == "NNS" else "who"
+    return re.sub(rf"\b{adj}\s+{noun}\b", f"{noun}, {pronoun} is {adj},", sentence, count=1)
+ 
+
+def perturb_cleft(record: dict, field: str = "sentence1") -> str:
+    sentence = record[field].rstrip(". ")
+    parse    = record[field + "_parse"]
+ 
+    np_block   = re.search(r"\(NP\s+(\(.*?\)\s*)+\)", parse)
+    if not np_block:
+        return record[field]
+ 
+    subj_words = re.findall(r"\(\w+\s+(\w+)\)", np_block.group(0))
+    subject    = " ".join(subj_words)
+    if not subject or subject not in sentence:
+        return record[field]
+ 
+    rest = sentence[sentence.index(subject) + len(subject):].strip()
+    return f"It was {subject.lower()} that {rest}."
+
+
+def perturb_pp_fronting(record: dict, field: str = "sentence1") -> str:
+    sentence = record[field].rstrip(". ")
+    parse    = record[field + "_parse"]
+ 
+    pp_block = re.search(r"\(PP\s+(\(.*?\)\s*)+\)", parse)
+    if not pp_block:
+        return record[field]
+ 
+    pp_words = re.findall(r"\(\w+\s+(\w+)\)", pp_block.group(0))
+    pp_text  = " ".join(pp_words)
+    if not pp_text or pp_text not in sentence:
+        return record[field]
+ 
+    remainder = sentence.replace(pp_text, "").strip().rstrip(",")
+    return f"{pp_text.capitalize()}, {remainder[0].lower() + remainder[1:]}."
+ 
+
+
+
 # Run 4 pretrained models with different architectures on the two different datasets
+
+#Encoder Transformer BERT-tiny-MNLI HuggingFace
+#Decoder Transformer gpt2-finetuned-mnli HuggingFace
+
+
+
+def evaluate_transformer(model, tokenizer, dataset):
+
+    correct = 0
+
+    for sample in dataset:
+        inputs = tokenizer(
+            sample["premise"],
+            sample["hypothesis"],
+            return_tensors="pt",
+            truncation=True
+        ).to(device)
+
+        outputs = model(**inputs)
+
+        pred = torch.argmax(outputs.logits).item()
+
+        if pred == sample["label"]:
+            correct += 1
+
+    return correct / len(dataset)
+
+from sklearn.linear_model import LogisticRegression
+import numpy as np
+
+def evaluate_mlp(model_name, dataset):
+
+    embedder = SentenceTransformer(model_name)
+
+    X = []
+    y = []
+
+    for sample in dataset:
+        text = sample["premise"] + " " + sample["hypothesis"]
+        emb = embedder.encode(text)
+
+        X.append(emb)
+        y.append(sample["label"])
+
+    clf = LogisticRegression(max_iter=1000)
+    clf.fit(X, y)
+
+    preds = clf.predict(X)
+
+    return (preds == np.array(y)).mean()
+
+
+results = {}
+
+for name, model_name in models.items():
+
+    if name == "mlp_embedding":
+
+        accA = evaluate_mlp(model_name, dataset_A)
+        accB = evaluate_mlp(model_name, dataset_B)
+
+    else:
+
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+        model = AutoModelForSequenceClassification.from_pretrained(
+            model_name,
+            num_labels=3
+        ).to(device)
+
+        accA = evaluate_transformer(model, tokenizer, dataset_A)
+        accB = evaluate_transformer(model, tokenizer, dataset_B)
+
+    results[name] = (accA, accB)
+
+for model, scores in results.items():
+
+    print(model)
+    print("Dataset A:", scores[0])
+    print("Dataset B:", scores[1])
+    print()
+
+
+
+
+
+
 """
 Write a 3–4 page report detailing your methodology and findings. Your report must include:
 1. A high-level introduction summarizing your approach and findings.
