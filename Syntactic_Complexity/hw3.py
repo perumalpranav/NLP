@@ -5,18 +5,27 @@ from sentence_transformers import SentenceTransformer
 from nltk import Tree
 import spacy
 import pandas as pd
+from tqdm import tqdm 
+import matplotlib.pyplot as plt
 
 SEED = 16
 nlp = spacy.load("en_core_web_sm")
 
 # ---- Complexity Measures ----
 
-def cfg_tree_depth(parse_string):
-    """
-    Computes maximum depth of a CFG constituency parse tree
-    """
-    tree = Tree.fromstring(parse_string)
-    return tree.height()
+def clause_density(sentence: str) -> float:
+    if not sentence:
+        return 0.0
+
+    clause_markers = [
+        "that", "which", "who", "whom", "because", "although",
+        "when", "while", "if", "since", "after", "before"
+    ]
+
+    words = sentence.lower().split()
+    clause_count = sum(1 for w in words if w in clause_markers)
+
+    return clause_count / max(len(words), 1)
 
 def subject_verb_distance(sentence):
     """
@@ -120,6 +129,10 @@ def perturb_pp_fronting(record: dict, field: str = "sentence1") -> str:
         return record[field]
  
     remainder = sentence.replace(pp_text, "").strip().rstrip(",")
+
+    if not remainder:
+        return record[field]
+
     return f"{pp_text.capitalize()}, {remainder[0].lower() + remainder[1:]}."
  
 # ---- Dataset Changes ----
@@ -130,7 +143,7 @@ mismatched_df = pd.read_json("./multinli_1.0_dev_mismatched.jsonl", lines=True)
 matched_df["split"] = "matched"
 mismatched_df["split"] = "mismatched"
 
-N = 2000
+N = 10000
 matched_sample = matched_df.sample(n=N, random_state=SEED)
 mismatched_sample = mismatched_df.sample(n=N, random_state=SEED)
 
@@ -166,19 +179,131 @@ combined_df["sentence2_pp"] = combined_df.apply(
     axis=1
 )
 
+rows = []
+
+for _, row in tqdm(combined_df.iterrows()):
+    new_row = {}
+
+    for col in ["sentence1", "sentence1_adj", "sentence1_cleft", "sentence1_pp",
+                "sentence2", "sentence2_adj", "sentence2_cleft", "sentence2_pp"]:
+
+        sentence = row[col]
+
+        new_row[f"{col}_clause_density"] = clause_density(sentence)
+        new_row[f"{col}_dep_depth"] = dependency_tree_depth(sentence)
+        new_row[f"{col}_subj_verb_dist"] = subject_verb_distance(sentence)
+
+    rows.append(new_row)
+
+complexity_df = pd.DataFrame(rows)
+
+column_means = complexity_df.mean(numeric_only=True)
+print(column_means)
+
+
+metrics = ["clause_density", "dep_depth", "subj_verb_dist"]
+bases = ["sentence1", "sentence2"]
+variants = ["", "_adj", "_cleft", "_pp"]
+variant_labels = ["base", "adj", "cleft", "pp"]
+colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"]  # distinct colors for each variant
+
+fig, axes = plt.subplots(3, 2, figsize=(12, 12))
+
+for i, metric in enumerate(metrics):
+    for j, base in enumerate(bases):
+        ax = axes[i, j]
+
+        cols = [f"{base}{v}_{metric}" for v in variants]
+        values = column_means[cols]
+
+        ax.bar(variant_labels, values, color=colors)
+        ax.set_title(f"{base} - {metric}")
+
+plt.tight_layout()
+plt.show()
+
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 models = {
-    "bert_encoder": "textattack/bert-base-uncased-SST-2",
-    "roberta_encoder": "roberta-base",
-    "gpt2_decoder": "gpt2",
-    "mlp_embedding": "sentence-transformers/all-MiniLM-L6-v2"
+    "distilbert_encoder": "typeform/distilbert-base-uncased-mnli",
+    "squeezebert_encoder": "squeezebert/squeezebert-mnli",
+    "bart_seq2seq": "facebook/bart-large-mnli",
+    "xlmroberta_encoder": "symanto/xlm-roberta-base-snli-mnli-anli-xnli"
 }
 
-
-
-
-
-
 # ---- Model Performances ----
+
+MODEL_LABEL_MAPS = {
+    "distilbert_encoder":  {0: "contradiction", 1: "neutral", 2: "entailment"},
+    "squeezebert_encoder": {0: "contradiction", 1: "neutral", 2: "entailment"},
+    "bart_seq2seq":        {0: "contradiction", 1: "neutral", 2: "entailment"},
+    "xlmroberta_encoder":  {0: "contradiction", 1: "neutral", 2: "entailment"},
+}
+
+VARIANTS = {
+    "base":  ("sentence1",       "sentence2"),
+    "adj":   ("sentence1_adj",   "sentence2_adj"),
+    "cleft": ("sentence1_cleft", "sentence2_cleft"),
+    "pp":    ("sentence1_pp",    "sentence2_pp"),
+}
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
+# ---- Prediction function ----
+def get_predictions(model, tokenizer, s1_list, s2_list, label_map):
+    inputs = tokenizer(s1_list, s2_list, return_tensors="pt", truncation=True, max_length=512, padding=True).to(device)
+    with torch.no_grad():
+        logits = model(**inputs).logits
+    return [label_map[idx] for idx in logits.argmax(dim=-1).tolist()]
+
+# ---- Accuracy ----
+def accuracy(gold, pred):
+    return sum(g==p for g, p in zip(gold, pred)) / len(gold)
+
+# ---- Run models ----
+accuracy_table = {}
+
+for model_name, model_path in models.items():
+    print(f"\nLoading {model_name}...")
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
+    model = AutoModelForSequenceClassification.from_pretrained(model_path).to(device)
+    model.eval()
+
+    label_map = MODEL_LABEL_MAPS[model_name]
+    accuracy_table[model_name] = {}
+
+    # Ensure variant columns exist and differ from base
+    for variant, (s1_col, s2_col) in VARIANTS.items():
+        df_valid = combined_df[combined_df["gold_label"].isin(["entailment", "neutral", "contradiction"])]
+        gold_labels = df_valid["gold_label"].tolist()
+        pred_labels = get_predictions(model, tokenizer, df_valid[s1_col].tolist(), df_valid[s2_col].tolist(), label_map)
+        accuracy_table[model_name][variant] = accuracy(gold_labels, pred_labels)
+
+    del model
+    torch.cuda.empty_cache()
+
+# ---- Convert to DataFrame ----
+accuracy_df = pd.DataFrame(accuracy_table).T
+print("\nAccuracy Table:")
+print(accuracy_df.to_string())
+
+# ---- Plot ----
+fig, ax = plt.subplots(figsize=(12,6))
+x = range(len(VARIANTS))
+n_models = len(accuracy_table)
+width = 0.8 / n_models
+
+for i, (model_name, variant_accs) in enumerate(accuracy_table.items()):
+    offsets = [xi + i*width for xi in x]
+    values = [variant_accs.get(v, 0) for v in VARIANTS]
+    ax.bar(offsets, values, width=width, label=model_name)
+
+ax.set_xticks([xi + (n_models-1)*width/2 for xi in x])
+ax.set_xticklabels(list(VARIANTS.keys()))
+ax.set_ylabel("Accuracy")
+ax.set_ylim(0,1)
+ax.set_title("NLI Model Accuracy Before and After Perturbation")
+ax.legend(loc="lower right")
+plt.tight_layout()
+plt.show()
