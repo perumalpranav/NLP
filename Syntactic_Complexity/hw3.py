@@ -120,7 +120,7 @@ mismatched_df = pd.read_json("./multinli_1.0_dev_mismatched.jsonl", lines=True)
 matched_df["split"] = "matched"
 mismatched_df["split"] = "mismatched"
 
-N = 100
+N = 8000
 matched_sample = matched_df.sample(n=N, random_state=SEED)
 mismatched_sample = mismatched_df.sample(n=N, random_state=SEED)
 
@@ -197,16 +197,15 @@ for i, metric in enumerate(metrics):
         ax.set_title(f"{base} - {metric}")
 
 plt.tight_layout()
-plt.savefig()
-plt.show()
+plt.savefig('complexity_plots.png')
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 models = {
     "deberta_mnli": "cross-encoder/nli-deberta-v3-xsmall",
-    "bart_mnli": "facebook/bart-large-mnli",
-    "mobilebert_mnli": "typeform/mobilebert-uncased-mnli",
-    "mpnet_mnli": "cross-encoder/nli-MiniLM2-L6-H768"
+    "tiny_bert_mnli": "prajjwal1/bert-tiny-mnli",
+    "electra_mnli": "howey/electra-small-mnli",
+    "nli_miniLM": "cross-encoder/nli-MiniLM2-L6-H768"
 }
 
 
@@ -221,20 +220,27 @@ LABEL_MAPS = {
     "electra_mnli":    {0: "contradiction", 1: "entailment",   2: "neutral"},
     "bart_mnli":       {0: "contradiction", 1: "neutral",       2: "entailment"},
     "mobilebert_mnli": {0: "entailment",    1: "neutral",       2: "contradiction"},
-    "mpnet_mnli":      {0: "contradiction", 1: "entailment",   2: "neutral"},
+    "nli_miniLM":      {0: "contradiction", 1: "entailment",   2: "neutral"},
     "distilbert_mnli": {0: "entailment",    1: "neutral",       2: "contradiction"},
     "albert_mnli":     {0: "entailment",    1: "neutral",       2: "contradiction"},
     "deberta_mnli":    {0: "contradiction", 1: "entailment",   2: "neutral"},
     "roberta_mnli":    {0: "contradiction", 1: "entailment",   2: "neutral"},
     "squeezebert_mnli":{0: "entailment",    1: "neutral",       2: "contradiction"},
+    "tiny_bert_mnli":  {0: "entailment",    1: "neutral",       2: "contradiction"},
 }
 
 # ---- Prediction function ----
-def get_predictions(model, tokenizer, s1_list, s2_list, label_map):
-    inputs = tokenizer(s1_list, s2_list, return_tensors="pt", truncation=True, max_length=512, padding=True).to(device)
-    with torch.no_grad():
-        logits = model(**inputs).logits
-    return [label_map[idx] for idx in logits.argmax(dim=-1).tolist()]
+def get_predictions(model, tokenizer, s1_list, s2_list, label_map, batch_size=32):
+    all_preds = []
+    for i in range(0, len(s1_list), batch_size):
+        s1_batch = s1_list[i:i+batch_size]
+        s2_batch = s2_list[i:i+batch_size]
+        inputs = tokenizer(s1_batch, s2_batch, return_tensors="pt",
+                          truncation=True, max_length=512, padding=True).to(device)
+        with torch.no_grad():
+            logits = model(**inputs).logits
+        all_preds.extend([label_map[idx] for idx in logits.argmax(dim=-1).tolist()])
+    return all_preds
 
 # ---- Accuracy ----
 def accuracy(gold, pred):
@@ -295,5 +301,4 @@ ax.set_ylim(0, 1)
 ax.set_title("NLI Model Accuracy Before and After Perturbation")
 ax.legend(title="Perturbation", loc="lower right")
 plt.tight_layout()
-plt.savefig()
-plt.show()
+plt.savefig('accuracy_plots.png')
