@@ -1,0 +1,28 @@
+NLP Riddle QA — T5-small experimental summary
+
+Dataset
+  Total examples (after dropna): 1000
+  Train / dev / test: 750 / 125 / 125
+
+Model & hyperparameters
+  Model: t5-small (unchanged architecture)
+  Random seeds (fine-tune): [0, 1, 2]
+  Max input tokens: 128 | max new tokens: 16
+  Batch size: 16 | learning rate: 0.0005
+  Max epochs: 3 | early-stopping patience: 3 (on dev loss)
+
+Training time (fine-tuning all seeds, approximate)
+  1390.0 seconds (23.17 minutes)
+
+Results (test set)
+  Majority baseline:  EM=0.0320  F1=0.3581
+  Pretrained (zero-shot T5, no riddle fine-tune):  EM=0.0000  F1=0.0254
+  Fine-tuned (mean over 3 seeds, ensemble-avg per example):  EM=0.6907  F1=0.7918
+
+Observations
+  Where the model succeeds: fine-tuning improves over both the majority and zero-shot
+  baselines when the riddle’s answer aligns with phrasing seen in training and with
+  short, canonical answer strings (e.g., 'a keyboard', 'a coin').
+  Where it fails: many gold answers are paraphrases or differ by articles/punctuation;
+  the model may be semantically right while exact match stays low — token F1 often
+  remains higher than EM, highlighting the semantic-correctness vs exact-string issue.

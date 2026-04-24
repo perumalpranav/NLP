@@ -1,0 +1,16 @@
+category,question,gold,pred,em,f1
+correct,What can travel around the world while staying in the same place?,A stamp,a stamp,1.0,1.0
+correct,"I am not alive, but I grow; I don't have lungs, but I need air; I don't have a mouth, but water kills me. What am I?",Fire,fire,1.0,1.0
+correct,What has a neck but no head?,A bottle,a bottle,1.0,1.0
+correct,"What has legs, but doesn't walk?",A table,a table,1.0,1.0
+correct,What has a bed but never sleeps?,A river,a river,1.0,1.0
+partial,"I am taken from a mine and shut up in a wooden case, from which I am never released, and yet I am used by everyone. What am I?",A pencil lead,pencil lead,0.0,0.8
+partial,What has legs but doesn't walk?,A chair,a table,0.0,0.5
+partial,What has hundreds of ears but can't hear a thing?,A cornfield,a comb,0.0,0.5
+partial,What has many faces but no body?,A clock,a book,0.0,0.5
+partial,What kind of tree can you carry in your hand?,A palm tree,a tree,0.0,0.8
+incorrect,What can fill a room but takes up no space?,Light,a vacuum,0.0,0.0
+incorrect,What goes up and down but doesn’t move?,A staircase,stairs,0.0,0.0
+incorrect,What word is always spelled wrong in the dictionary?,Wrong,a word,0.0,0.0
+incorrect,What comes down but never goes up?,Rain,your age,0.0,0.0
+incorrect,"I speak without a mouth and hear without ears. I have nobody, but I come alive with wind. What am I?",An echo,a voice,0.0,0.0

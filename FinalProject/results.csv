@@ -1,126 +1,126 @@
-question,gold,zeroshot_pred,finetuned_pred,avg_em,avg_f1
-What can travel around the world while staying in the same place?,A stamp,"Was kann man in der Welt reisen, wenn man sich in einem Ort ",a stamp,1.0,1.0
-"I am not alive, but I grow; I don't have lungs, but I need air; I don't have a mouth, but water kills me. What am I?",Fire,": I am not alive, but I grow; I don't have",fire,1.0,1.0
-What has a neck but no head?,A bottle,riddle: Was has a neck but no head?,a bottle,1.0,1.0
-"I am taken from a mine and shut up in a wooden case, from which I am never released, and yet I am used by everyone. What am I?",A pencil lead,: I am taken from a mine and shut up in a wooden,pencil lead,0.0,0.8000000000000002
-What has legs but doesn't walk?,A chair,"Was hat die Beine, aber nicht geht?",a table,0.0,0.5
-"What has legs, but doesn't walk?",A table,"Was hat die Beine, aber nicht geht?",a table,1.0,1.0
-What has a bed but never sleeps?,A river,: What has a bed but never sleeps?,a river,1.0,1.0
-What has a thumb and four fingers but is not alive?,A glove,"Was hat ein thumb und vier Finger, aber nicht lebendig?",a glove,1.0,1.0
-What runs around the whole yard without moving?,A fence,Was läuft in der yard ohne Bewegung?,a fence,1.0,1.0
-What can fill a room but takes up no space?,Light,riddle: What can fill a room but takes up no space?,light,1.0,1.0
-What has hundreds of ears but can't hear a thing?,A cornfield,"Was hat Hunderte d'oreilles, aber kann ",a cornfield,1.0,1.0
-What goes up and down but doesn’t move?,A staircase,"Was steigt und stößt, aber es löst",stairs,0.0,0.0
-"The more you take, the more you leave behind. What am I?",Footsteps,Was ist es?,footsteps,1.0,1.0
-"What comes once in a minute, twice in a moment, but never in a thousand years?",The letter M,"Was kommt einmal in einer Minute, zwei in einem Moment, aber nie in ",the letter m,1.0,1.0
-What's full of holes but still holds water?,A sponge,dle: What's full of holes but still holds water?,a sponge,1.0,1.0
-"What runs but never walks, has a bed but never sleeps, has a mouth but never talks?",A river,"What runs but never walks, has a bed but never sleeps,",a river,1.0,1.0
-What word is always spelled wrong in the dictionary?,Wrong,Warum ist das Wort nicht immer falsch?,a wrong,0.0,0.38888888888888884
-What goes up but never comes down?,Your age,"riddle: Was steigt, aber nie fällt down?",your age,1.0,1.0
-"I have no life, but I grow; I don't have lungs, but I need air; I don't have a mouth, but water kills me. What am I?",Fire,"I have no life, but I grow; I don't have ",fire,1.0,1.0
-What comes down but never goes up?,Rain,"riddle: Was comes down, but never goes up?",rain,1.0,1.0
-I am always hungry; I must always be fed. The finger I touch will soon turn red. What am I?,Fire,: I am always hungry; I must always be fed. The finger I,fire,1.0,1.0
-"I speak without a mouth and hear without ears. I have nobody, but I come alive with wind. What am I?",An echo,: I speak without a mouth and hear without ears. I have nobody,an echo,1.0,1.0
-What gets wetter and wetter the more it dries?,A towel,"riddle: Was gewinns wetter und wetter,",a towel,1.0,1.0
-What has a head and a tail that are only made of gold?,A coin,"Was hat eine Kopf und eine Tail, die nur aus gold gemacht sind?",a coin,1.0,1.0
-What has to be broken before you can use it?,An egg,"riddle: Was muss gebrochen sein, bevor Sie es benutzen",an egg,1.0,1.0
-I have a heart that doesn’t beat. What am I?,An artichoke,: I have a heart that doesn’t beat. What am I,a deck of cards,0.0,0.0
-What has many faces but no body?,A clock,"riddle: Was hat viele Gesicht, aber kein Körper?",a dice,0.3333333333333333,0.6666666666666666
-"What has legs, but doesn't walk?",A table,"Was hat die Beine, aber nicht geht?",a table,1.0,1.0
-"What runs but never walks, has a mouth but never talks, has a head but never weeps, has a bed but never sleeps?",A river,"What runs but never walks, has a mouth but never talks, has",a river,1.0,1.0
-"What has cities but no houses, forests but no trees, and rivers but no water?",A map,"Was hat Städte, aber keine Häuser, keine Wald, keine Bäume, keine",a map,1.0,1.0
-What can fly without wings?,Rumors,: Was kann z Ohne wings?,time,0.0,0.0
-"The more you take, the more you leave behind. What am I?",Footsteps,Was ist es?,footsteps,1.0,1.0
-What has teeth but doesn't bite?,A comb,"Was hat Zähne, aber nicht?",a comb,1.0,1.0
-What kind of tree can you carry in your hand?,A palm tree,riddle: Welchen Baum kann man in der Hand tragen?,a rope,0.0,0.6666666666666666
-What can you hear but not touch or see?,Sound,"riddle: Was can you hear, but not touch or see?",a listen,0.0,0.0
-What has one eye but cannot see?,A needle,riddle: Was has one eye but cannot see?,a needle,1.0,1.0
-What has a spine but no bones?,A book,": Was hat eine spine, aber keine Knochen?",a book,1.0,1.0
-What gets wetter and wetter the more it dries?,A towel,"riddle: Was gewinns wetter und wetter,",a towel,1.0,1.0
-What can be caught but not thrown?,A glimpse,"riddle: Was kann gefangen, aber nicht throw?",a cold,0.0,0.5
-What can you catch but not throw?,A cold,"riddle: Was can you catch, but not throw?",a cold,1.0,1.0
-"The more you take, the more you leave behind. What am I?",Footsteps,Was ist es?,footsteps,1.0,1.0
-"What flies when it’s born, lies when it’s alive, and runs when it’s dead?",A snowflake,"Was flies when it’s born, lies when it’s alive",a snowflake,1.0,1.0
-What has an eye but can't blink?,A needle,"Was hat ein Auge, aber nicht blinken?",a needle,1.0,1.0
-What can be opened but never closed?,A secret,"riddle: Was kann geöffnet, aber nie closed?",an egg,0.0,0.0
-"What begins with T, ends with T, and has T in it?",A teapot,"Was beginnt mit T, endet mit T, und hat T in",a teapot,1.0,1.0
-"What has keys that open no locks, space but no room, and you can enter but not go in?",A keyboard,"Was hat Schlüssel, die keine locks, keinen Raum, keinen Raum",a keyboard,1.0,1.0
-"I'm tall when I'm young, and I'm short when I'm old. What am I?",A candle,": I'm tall when I'm young, and I'm",a candle,1.0,1.0
-What gets sharper the more you use it?,Your brain,": Was nimmt sharper, wenn man es nutzt?",your brain,1.0,1.0
-What has keys but no locks?,A piano,": Was hat keys, aber keine locks?",a map,0.3333333333333333,0.6666666666666666
-What gets bigger when you take away from it?,A hole,": Was nimmt größer, wenn man es nimmt?",a hole,1.0,1.0
-I'm tall when I'm young and short when I'm old. What am I?,A candle,: I'm tall when I'm young and short when I',a candle,1.0,1.0
-"What has keys but no locks, space but no room, and you can enter but can't go in?",A keyboard,"Was hat Schlüssel, aber keine locks, space, room, and you can",a keyboard,1.0,1.0
-"What has legs, but doesn't walk?",A table,"Was hat die Beine, aber nicht geht?",a table,1.0,1.0
-"What goes through cities and fields, but never moves?",A road,": Was passiert durch Städte und Feld, aber nie bewegt?",a road,1.0,1.0
-"What comes once in a minute, twice in a moment, but never in a thousand years?",The letter M,"Was kommt einmal in einer Minute, zwei in einem Moment, aber nie in ",the letter m,1.0,1.0
-What has keys but no locks?,A typewriter,": Was hat keys, aber keine locks?",a map,0.0,0.5
-What has legs but doesn't walk?,A chair,"Was hat die Beine, aber nicht geht?",a table,0.0,0.5
-"What comes once in a minute, twice in a moment, but never in a thousand years?",The letter M,"Was kommt einmal in einer Minute, zwei in einem Moment, aber nie in ",the letter m,1.0,1.0
-"I am taken from a mine and shut up in a wooden case, from which I am never released, and yet I am used by everyone. What am I?",Pencil lead,: I am taken from a mine and shut up in a wooden,pencil lead,1.0,1.0
-"What comes once in a minute, twice in a moment, but never in a thousand years?",The letter M,"Was kommt einmal in einer Minute, zwei in einem Moment, aber nie in ",the letter m,1.0,1.0
-"What has keys that open no locks, space but no room, and you can enter but not go in?",A keyboard,"Was hat Schlüssel, die keine locks, keinen Raum, keinen Raum",a keyboard,1.0,1.0
-What can be opened but never closed?,Pandora's box,"riddle: Was kann geöffnet, aber nie closed?",an egg,0.0,0.0
-What can fill a room but takes up no space?,Light,riddle: What can fill a room but takes up no space?,light,1.0,1.0
-What has a neck but no head?,A bottle,riddle: Was has a neck but no head?,a bottle,1.0,1.0
-What has a head and a tail that are only made of gold?,A coin,"Was hat eine Kopf und eine Tail, die nur aus gold gemacht sind?",a coin,1.0,1.0
-I have keys but can’t open doors. What am I?,A piano,": I have keys, but can’t open doors.",a piano,0.3333333333333333,0.6666666666666666
-What can you keep after giving to someone?,Your word,riddle: Was can you keep after giving to someone?,your word,1.0,1.0
-What can fill a room but takes up no space?,Light,riddle: What can fill a room but takes up no space?,light,1.0,1.0
-What gets sharper the more you use it?,Your mind,": Was nimmt sharper, wenn man es nutzt?",your brain,0.0,0.5
-"What has branches but no leaves, bark, or fruit?",A bank,"Was hat branches, aber keine Blätter, keine Bark oder keine Früchte?",a bank,1.0,1.0
-What has keys but can't listen to the beauty it unlocks?,A piano,What has keys but can't listen to the beauty it unlocks?,a piano,1.0,1.0
-What can go up and down stairs without moving?,A carpet,: Was kann es laufen und laufen stair without moving,stairs,0.0,0.0
-"I am taken from a mine, and shut up in a wooden case, from which I am never released. What am I?",A pencil,": I am taken from a mine, and shut up in a",pencil lead,0.0,0.5
-What can fill a room but takes up no space?,Light,riddle: What can fill a room but takes up no space?,light,1.0,1.0
-What has branches but no leaves?,A library,"riddle: Was hat branches, aber keine Blätter?",a bank,0.0,0.5
-What has many keys but can’t open locks?,A piano,"Was hat viele Schlüssel, aber kann es nicht öffnen?",a piano,1.0,1.0
-What has hands but cannot clap?,A tree,riddle: Was has hands but cannot clap?,a clock,0.0,0.5
-What goes up when the rain comes down?,An umbrella,": Was steigt, wenn die Regen fällt?",temperature,0.0,0.0
-What has many keys but can't open a single lock?,A piano,"Was hat viele Schlüssel, aber kann es nicht geben?",a piano,1.0,1.0
-"What has a bed but never sleeps, has a mouth but never talks, runs but never walks?",A river,"What has a bed but never sleeps, has a mouth but",a river,1.0,1.0
-What kind of coat is always wet when you put it on?,A coat of paint,: Welches coat ist immer wet wenn man et e,a towel,0.0,0.3333333333333333
-"What has roots that nobody sees, is taller than trees, up it goes, and yet never grows?",A mountain,"What has roots that nobody sees, is taller than trees, up",a mountain,1.0,1.0
-What has a heart but no other organs?,A deck of cards,What has a heart but no other organs?,a deck of cards,1.0,1.0
-What has a head and a tail but no body?,A coin,"Was hat Kopf und Tail, aber kein Körper?",a coin,1.0,1.0
-"I'm light as a feather, yet the strongest person can't hold me for much longer than a minute. What am I?",Breath,"I'm light as a feather, yet the strongest person can'",breath,1.0,1.0
-What has a thumb and four fingers but is not alive?,A glove,"Was hat ein thumb und vier Finger, aber nicht lebendig?",a glove,1.0,1.0
-What has a neck but no head?,A bottle,riddle: Was has a neck but no head?,a bottle,1.0,1.0
-What can fill a room but takes up no space?,Light,riddle: What can fill a room but takes up no space?,light,1.0,1.0
-What has many needles but doesn’t sew?,A Christmas tree,"Was hat viele nadeln, aber ne sewn",a pine tree,0.0,0.6666666666666666
-What goes up and down but doesn't move?,Stairs,"Was steigt und stößt, aber es löst",stairs,1.0,1.0
-I have a head and a tail that will never meet. Having too many of me is always a treat. What am I?,A coin,: I have a head and a tail that will never meet.,a coin,1.0,1.0
-What has a face and two hands but no arms or legs?,A clock,"Was hat ein Gesicht und zwei Hände, aber keine Armen oder Beine",a clock,1.0,1.0
-What has legs but doesn't walk?,A table,"Was hat die Beine, aber nicht geht?",a table,1.0,1.0
-"What has a mouth but doesn't eat, has a bank but no money?",A river,"What has a mouth but doesn't eat, has a",a river,1.0,1.0
-"What has keys that open no locks, space but no room, and you can enter but not go in?",A keyboard,"Was hat Schlüssel, die keine locks, keinen Raum, keinen Raum",a keyboard,1.0,1.0
-What has a mouth but never speaks?,A river,: Was hat a mouth but never speaks?,a river,0.6666666666666666,0.8333333333333334
-What's full of holes but still holds water?,A sponge,dle: What's full of holes but still holds water?,a sponge,1.0,1.0
-"What has branches but no fruit, trunk or leaves?",A bank,"Warum gibt es branches, aber keine Früchte, keinen trunk,",a bank,1.0,1.0
-What has a neck but no head?,A bottle,riddle: Was has a neck but no head?,a bottle,1.0,1.0
-What goes up but never comes down?,Age,"riddle: Was steigt, aber nie fällt down?",your age,0.0,0.6666666666666666
-What has many needles but doesn't sew?,A pine tree,"Was hat viele nadeln, aber ne sewn",a pine tree,1.0,1.0
-What gets bigger when you take away from it?,A hole,": Was nimmt größer, wenn man es nimmt?",a hole,1.0,1.0
-What gets wetter as it dries?,A towel,"riddle: Was nimmt schmutzii, wenn es",a towel,1.0,1.0
-What has legs but doesn't walk?,A table,"Was hat die Beine, aber nicht geht?",a table,1.0,1.0
-What has a face and two hands but no arms or legs?,A clock,"Was hat ein Gesicht und zwei Hände, aber keine Armen oder Beine",a clock,1.0,1.0
-What has a neck but no head?,A bottle,riddle: Was has a neck but no head?,a bottle,1.0,1.0
-I’m tall when I’m young and short when I’m old. What am I?,A candle,: I’m tall when I’m young and short when I’,a candle,1.0,1.0
-What is so fragile that saying its name breaks it?,Silence,       ,silence,1.0,1.0
-What invention lets you look right through a wall?,A window,"Welche invention bietet Ihnen die Möglichkeit, durch einen wall zu schauen?",a window,1.0,1.0
-What runs around the whole yard without moving?,A fence,Was läuft in der yard ohne Bewegung?,a fence,1.0,1.0
-"I have branches, but no fruit, trunk or leaves. What am I?",A bank,": I have branches, but no fruit, trunk or leaves.",a bank,1.0,1.0
-What can travel around the world while staying in a corner?,A stamp,: What can travel around the world while staying in a corner?,a stamp,1.0,1.0
-"What can you break, even if you never pick it up or touch it?",A promise,"Règlement: Was kann man brechen, wenn man nie e",a promise,1.0,1.0
-What gets wetter and wetter the more it dries?,A towel,"riddle: Was gewinns wetter und wetter,",a towel,1.0,1.0
-What can fill a room but takes up no space?,Light,riddle: What can fill a room but takes up no space?,light,1.0,1.0
-What gets bigger when you take away from it?,A hole,": Was nimmt größer, wenn man es nimmt?",a hole,1.0,1.0
-What can be broken without being touched?,A heart,riddle: Was kann gebrochen ohne rühren?,a promise,0.0,0.5
-"I am not alive, but I grow; I don't have lungs, but I need air; I don't have a mouth, but water kills me. What am I?",Fire,": I am not alive, but I grow; I don't have",fire,1.0,1.0
-What can fly without wings?,Time,: Was kann z Ohne wings?,time,1.0,1.0
-I'm always hungry; I must always be fed. The finger I touch will soon turn red. What am I?,Fire,: I'm always hungry; I must always be fed. The finger,fire,1.0,1.0
-What goes up but never comes down?,Your age,"riddle: Was steigt, aber nie fällt down?",your age,1.0,1.0
-"I'm full of holes, but I still hold water. What am I?",A sponge,": I'm full of holes, but I still hold water.",a sponge,1.0,1.0
-What can you break without touching it?,A promise,: Was can break without touching it?,a promise,1.0,1.0
-"What has a mouth but doesn't eat, has a bank but no money?",A river,"What has a mouth but doesn't eat, has a",a river,1.0,1.0
-"I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?",A map,": I have cities, but no houses. I have mountains, but no",a map,1.0,1.0
+question,gold,majority_pred,zeroshot_pred,finetuned_pred,avg_em,avg_f1
+What can travel around the world while staying in the same place?,A stamp,A keyboard,"Was kann man in der Welt reisen, wenn man sich in einem Ort ",a stamp,1.0,1.0
+"I am not alive, but I grow; I don't have lungs, but I need air; I don't have a mouth, but water kills me. What am I?",Fire,A keyboard,": I am not alive, but I grow; I don't have",fire,1.0,1.0
+What has a neck but no head?,A bottle,A keyboard,riddle: Was has a neck but no head?,a bottle,1.0,1.0
+"I am taken from a mine and shut up in a wooden case, from which I am never released, and yet I am used by everyone. What am I?",A pencil lead,A keyboard,: I am taken from a mine and shut up in a wooden,pencil lead,0.3333333333333333,0.8666666666666667
+What has legs but doesn't walk?,A chair,A keyboard,"Was hat die Beine, aber nicht geht?",a table,0.0,0.5
+"What has legs, but doesn't walk?",A table,A keyboard,"Was hat die Beine, aber nicht geht?",a table,1.0,1.0
+What has a bed but never sleeps?,A river,A keyboard,: What has a bed but never sleeps?,a river,1.0,1.0
+What has a thumb and four fingers but is not alive?,A glove,A keyboard,"Was hat ein thumb und vier Finger, aber nicht lebendig?",a glove,1.0,1.0
+What runs around the whole yard without moving?,A fence,A keyboard,Was läuft in der yard ohne Bewegung?,a fence,1.0,1.0
+What can fill a room but takes up no space?,Light,A keyboard,riddle: What can fill a room but takes up no space?,a vacuum,0.6666666666666666,0.6666666666666666
+What has hundreds of ears but can't hear a thing?,A cornfield,A keyboard,"Was hat Hunderte d'oreilles, aber kann ",a comb,0.0,0.5
+What goes up and down but doesn’t move?,A staircase,A keyboard,"Was steigt und stößt, aber es löst",stairs,0.0,0.0
+"The more you take, the more you leave behind. What am I?",Footsteps,A keyboard,Was ist es?,footsteps,1.0,1.0
+"What comes once in a minute, twice in a moment, but never in a thousand years?",The letter M,A keyboard,"Was kommt einmal in einer Minute, zwei in einem Moment, aber nie in ",the letter m,1.0,1.0
+What's full of holes but still holds water?,A sponge,A keyboard,dle: What's full of holes but still holds water?,a sponge,1.0,1.0
+"What runs but never walks, has a bed but never sleeps, has a mouth but never talks?",A river,A keyboard,"What runs but never walks, has a bed but never sleeps,",a river,1.0,1.0
+What word is always spelled wrong in the dictionary?,Wrong,A keyboard,Warum ist das Wort nicht immer falsch?,a word,0.0,0.0
+What goes up but never comes down?,Your age,A keyboard,"riddle: Was steigt, aber nie fällt down?",your age,0.3333333333333333,0.7777777777777777
+"I have no life, but I grow; I don't have lungs, but I need air; I don't have a mouth, but water kills me. What am I?",Fire,A keyboard,"I have no life, but I grow; I don't have ",fire,1.0,1.0
+What comes down but never goes up?,Rain,A keyboard,"riddle: Was comes down, but never goes up?",your age,0.0,0.0
+I am always hungry; I must always be fed. The finger I touch will soon turn red. What am I?,Fire,A keyboard,: I am always hungry; I must always be fed. The finger I,fire,1.0,1.0
+"I speak without a mouth and hear without ears. I have nobody, but I come alive with wind. What am I?",An echo,A keyboard,: I speak without a mouth and hear without ears. I have nobody,a voice,0.0,0.0
+What gets wetter and wetter the more it dries?,A towel,A keyboard,"riddle: Was gewinns wetter und wetter,",a towel,1.0,1.0
+What has a head and a tail that are only made of gold?,A coin,A keyboard,"Was hat eine Kopf und eine Tail, die nur aus gold gemacht sind?",a coin,1.0,1.0
+What has to be broken before you can use it?,An egg,A keyboard,"riddle: Was muss gebrochen sein, bevor Sie es benutzen",a promise,0.0,0.0
+I have a heart that doesn’t beat. What am I?,An artichoke,A keyboard,: I have a heart that doesn’t beat. What am I,a candle,0.0,0.0
+What has many faces but no body?,A clock,A keyboard,"riddle: Was hat viele Gesicht, aber kein Körper?",a book,0.0,0.5
+"What has legs, but doesn't walk?",A table,A keyboard,"Was hat die Beine, aber nicht geht?",a table,1.0,1.0
+"What runs but never walks, has a mouth but never talks, has a head but never weeps, has a bed but never sleeps?",A river,A keyboard,"What runs but never walks, has a mouth but never talks, has",a river,1.0,1.0
+"What has cities but no houses, forests but no trees, and rivers but no water?",A map,A keyboard,"Was hat Städte, aber keine Häuser, keine Wald, keine Bäume, keine",a map,1.0,1.0
+What can fly without wings?,Rumors,A keyboard,: Was kann z Ohne wings?,a fly,0.0,0.0
+"The more you take, the more you leave behind. What am I?",Footsteps,A keyboard,Was ist es?,footsteps,1.0,1.0
+What has teeth but doesn't bite?,A comb,A keyboard,"Was hat Zähne, aber nicht?",a comb,1.0,1.0
+What kind of tree can you carry in your hand?,A palm tree,A keyboard,riddle: Welchen Baum kann man in der Hand tragen?,a tree,0.0,0.6666666666666666
+What can you hear but not touch or see?,Sound,A keyboard,"riddle: Was can you hear, but not touch or see?",a cold,0.0,0.0
+What has one eye but cannot see?,A needle,A keyboard,riddle: Was has one eye but cannot see?,a needle,1.0,1.0
+What has a spine but no bones?,A book,A keyboard,": Was hat eine spine, aber keine Knochen?",a river,0.0,0.5
+What gets wetter and wetter the more it dries?,A towel,A keyboard,"riddle: Was gewinns wetter und wetter,",a towel,1.0,1.0
+What can be caught but not thrown?,A glimpse,A keyboard,"riddle: Was kann gefangen, aber nicht throw?",a cold,0.0,0.5
+What can you catch but not throw?,A cold,A keyboard,"riddle: Was can you catch, but not throw?",a cold,1.0,1.0
+"The more you take, the more you leave behind. What am I?",Footsteps,A keyboard,Was ist es?,footsteps,1.0,1.0
+"What flies when it’s born, lies when it’s alive, and runs when it’s dead?",A snowflake,A keyboard,"Was flies when it’s born, lies when it’s alive",a river,0.3333333333333333,0.6666666666666666
+What has an eye but can't blink?,A needle,A keyboard,"Was hat ein Auge, aber nicht blinken?",a comb,0.3333333333333333,0.6666666666666666
+What can be opened but never closed?,A secret,A keyboard,"riddle: Was kann geöffnet, aber nie closed?",a promise,0.0,0.5
+"What begins with T, ends with T, and has T in it?",A teapot,A keyboard,"Was beginnt mit T, endet mit T, und hat T in",a teapot,1.0,1.0
+"What has keys that open no locks, space but no room, and you can enter but not go in?",A keyboard,A keyboard,"Was hat Schlüssel, die keine locks, keinen Raum, keinen Raum",a keyboard,1.0,1.0
+"I'm tall when I'm young, and I'm short when I'm old. What am I?",A candle,A keyboard,": I'm tall when I'm young, and I'm",a candle,1.0,1.0
+What gets sharper the more you use it?,Your brain,A keyboard,": Was nimmt sharper, wenn man es nutzt?",your brain,1.0,1.0
+What has keys but no locks?,A piano,A keyboard,": Was hat keys, aber keine locks?",a piano,1.0,1.0
+What gets bigger when you take away from it?,A hole,A keyboard,": Was nimmt größer, wenn man es nimmt?",a hole,1.0,1.0
+I'm tall when I'm young and short when I'm old. What am I?,A candle,A keyboard,: I'm tall when I'm young and short when I',a candle,1.0,1.0
+"What has keys but no locks, space but no room, and you can enter but can't go in?",A keyboard,A keyboard,"Was hat Schlüssel, aber keine locks, space, room, and you can",a keyboard,1.0,1.0
+"What has legs, but doesn't walk?",A table,A keyboard,"Was hat die Beine, aber nicht geht?",a table,1.0,1.0
+"What goes through cities and fields, but never moves?",A road,A keyboard,": Was passiert durch Städte und Feld, aber nie bewegt?",a road,1.0,1.0
+"What comes once in a minute, twice in a moment, but never in a thousand years?",The letter M,A keyboard,"Was kommt einmal in einer Minute, zwei in einem Moment, aber nie in ",the letter m,1.0,1.0
+What has keys but no locks?,A typewriter,A keyboard,": Was hat keys, aber keine locks?",a piano,0.0,0.5
+What has legs but doesn't walk?,A chair,A keyboard,"Was hat die Beine, aber nicht geht?",a table,0.0,0.5
+"What comes once in a minute, twice in a moment, but never in a thousand years?",The letter M,A keyboard,"Was kommt einmal in einer Minute, zwei in einem Moment, aber nie in ",the letter m,1.0,1.0
+"I am taken from a mine and shut up in a wooden case, from which I am never released, and yet I am used by everyone. What am I?",Pencil lead,A keyboard,: I am taken from a mine and shut up in a wooden,pencil lead,0.6666666666666666,0.9333333333333332
+"What comes once in a minute, twice in a moment, but never in a thousand years?",The letter M,A keyboard,"Was kommt einmal in einer Minute, zwei in einem Moment, aber nie in ",the letter m,1.0,1.0
+"What has keys that open no locks, space but no room, and you can enter but not go in?",A keyboard,A keyboard,"Was hat Schlüssel, die keine locks, keinen Raum, keinen Raum",a keyboard,1.0,1.0
+What can be opened but never closed?,Pandora's box,A keyboard,"riddle: Was kann geöffnet, aber nie closed?",a promise,0.0,0.0
+What can fill a room but takes up no space?,Light,A keyboard,riddle: What can fill a room but takes up no space?,a vacuum,0.6666666666666666,0.6666666666666666
+What has a neck but no head?,A bottle,A keyboard,riddle: Was has a neck but no head?,a bottle,1.0,1.0
+What has a head and a tail that are only made of gold?,A coin,A keyboard,"Was hat eine Kopf und eine Tail, die nur aus gold gemacht sind?",a coin,1.0,1.0
+I have keys but can’t open doors. What am I?,A piano,A keyboard,": I have keys, but can’t open doors.",a keyboard,0.0,0.5
+What can you keep after giving to someone?,Your word,A keyboard,riddle: Was can you keep after giving to someone?,your word,0.6666666666666666,0.8333333333333334
+What can fill a room but takes up no space?,Light,A keyboard,riddle: What can fill a room but takes up no space?,a vacuum,0.6666666666666666,0.6666666666666666
+What gets sharper the more you use it?,Your mind,A keyboard,": Was nimmt sharper, wenn man es nutzt?",your brain,0.0,0.5
+"What has branches but no leaves, bark, or fruit?",A bank,A keyboard,"Was hat branches, aber keine Blätter, keine Bark oder keine Früchte?",a bank,1.0,1.0
+What has keys but can't listen to the beauty it unlocks?,A piano,A keyboard,What has keys but can't listen to the beauty it unlocks?,a piano,1.0,1.0
+What can go up and down stairs without moving?,A carpet,A keyboard,: Was kann es laufen und laufen stair without moving,stairs,0.0,0.0
+"I am taken from a mine, and shut up in a wooden case, from which I am never released. What am I?",A pencil,A keyboard,": I am taken from a mine, and shut up in a",pencil lead,0.0,0.6
+What can fill a room but takes up no space?,Light,A keyboard,riddle: What can fill a room but takes up no space?,a vacuum,0.6666666666666666,0.6666666666666666
+What has branches but no leaves?,A library,A keyboard,"riddle: Was hat branches, aber keine Blätter?",a bank,0.0,0.5
+What has many keys but can’t open locks?,A piano,A keyboard,"Was hat viele Schlüssel, aber kann es nicht öffnen?",a piano,1.0,1.0
+What has hands but cannot clap?,A tree,A keyboard,riddle: Was has hands but cannot clap?,a clock,0.0,0.5
+What goes up when the rain comes down?,An umbrella,A keyboard,": Was steigt, wenn die Regen fällt?",your age,0.0,0.0
+What has many keys but can't open a single lock?,A piano,A keyboard,"Was hat viele Schlüssel, aber kann es nicht geben?",a piano,1.0,1.0
+"What has a bed but never sleeps, has a mouth but never talks, runs but never walks?",A river,A keyboard,"What has a bed but never sleeps, has a mouth but",a river,1.0,1.0
+What kind of coat is always wet when you put it on?,A coat of paint,A keyboard,: Welches coat ist immer wet wenn man et e,a towel,0.0,0.3333333333333333
+"What has roots that nobody sees, is taller than trees, up it goes, and yet never grows?",A mountain,A keyboard,"What has roots that nobody sees, is taller than trees, up",a mountain,1.0,1.0
+What has a heart but no other organs?,A deck of cards,A keyboard,What has a heart but no other organs?,a book,0.0,0.3333333333333333
+What has a head and a tail but no body?,A coin,A keyboard,"Was hat Kopf und Tail, aber kein Körper?",a coin,1.0,1.0
+"I'm light as a feather, yet the strongest person can't hold me for much longer than a minute. What am I?",Breath,A keyboard,"I'm light as a feather, yet the strongest person can'",breath,1.0,1.0
+What has a thumb and four fingers but is not alive?,A glove,A keyboard,"Was hat ein thumb und vier Finger, aber nicht lebendig?",a glove,1.0,1.0
+What has a neck but no head?,A bottle,A keyboard,riddle: Was has a neck but no head?,a bottle,1.0,1.0
+What can fill a room but takes up no space?,Light,A keyboard,riddle: What can fill a room but takes up no space?,a vacuum,0.6666666666666666,0.6666666666666666
+What has many needles but doesn’t sew?,A Christmas tree,A keyboard,"Was hat viele nadeln, aber ne sewn",a cactus,0.0,0.4000000000000001
+What goes up and down but doesn't move?,Stairs,A keyboard,"Was steigt und stößt, aber es löst",stairs,1.0,1.0
+I have a head and a tail that will never meet. Having too many of me is always a treat. What am I?,A coin,A keyboard,: I have a head and a tail that will never meet.,a coin,1.0,1.0
+What has a face and two hands but no arms or legs?,A clock,A keyboard,"Was hat ein Gesicht und zwei Hände, aber keine Armen oder Beine",a clock,1.0,1.0
+What has legs but doesn't walk?,A table,A keyboard,"Was hat die Beine, aber nicht geht?",a table,1.0,1.0
+"What has a mouth but doesn't eat, has a bank but no money?",A river,A keyboard,"What has a mouth but doesn't eat, has a",a bank,0.6666666666666666,0.8333333333333334
+"What has keys that open no locks, space but no room, and you can enter but not go in?",A keyboard,A keyboard,"Was hat Schlüssel, die keine locks, keinen Raum, keinen Raum",a keyboard,1.0,1.0
+What has a mouth but never speaks?,A river,A keyboard,: Was hat a mouth but never speaks?,a river,0.3333333333333333,0.6666666666666666
+What's full of holes but still holds water?,A sponge,A keyboard,dle: What's full of holes but still holds water?,a sponge,1.0,1.0
+"What has branches but no fruit, trunk or leaves?",A bank,A keyboard,"Warum gibt es branches, aber keine Früchte, keinen trunk,",a bank,1.0,1.0
+What has a neck but no head?,A bottle,A keyboard,riddle: Was has a neck but no head?,a bottle,1.0,1.0
+What goes up but never comes down?,Age,A keyboard,"riddle: Was steigt, aber nie fällt down?",your age,0.6666666666666666,0.8888888888888888
+What has many needles but doesn't sew?,A pine tree,A keyboard,"Was hat viele nadeln, aber ne sewn",a cactus,0.0,0.4000000000000001
+What gets bigger when you take away from it?,A hole,A keyboard,": Was nimmt größer, wenn man es nimmt?",a hole,1.0,1.0
+What gets wetter as it dries?,A towel,A keyboard,"riddle: Was nimmt schmutzii, wenn es",a towel,1.0,1.0
+What has legs but doesn't walk?,A table,A keyboard,"Was hat die Beine, aber nicht geht?",a table,1.0,1.0
+What has a face and two hands but no arms or legs?,A clock,A keyboard,"Was hat ein Gesicht und zwei Hände, aber keine Armen oder Beine",a clock,1.0,1.0
+What has a neck but no head?,A bottle,A keyboard,riddle: Was has a neck but no head?,a bottle,1.0,1.0
+I’m tall when I’m young and short when I’m old. What am I?,A candle,A keyboard,: I’m tall when I’m young and short when I’,a candle,1.0,1.0
+What is so fragile that saying its name breaks it?,Silence,A keyboard,       ,silence,1.0,1.0
+What invention lets you look right through a wall?,A window,A keyboard,"Welche invention bietet Ihnen die Möglichkeit, durch einen wall zu schauen?",a window,1.0,1.0
+What runs around the whole yard without moving?,A fence,A keyboard,Was läuft in der yard ohne Bewegung?,a fence,1.0,1.0
+"I have branches, but no fruit, trunk or leaves. What am I?",A bank,A keyboard,": I have branches, but no fruit, trunk or leaves.",a bank,1.0,1.0
+What can travel around the world while staying in a corner?,A stamp,A keyboard,: What can travel around the world while staying in a corner?,a stamp,1.0,1.0
+"What can you break, even if you never pick it up or touch it?",A promise,A keyboard,"Règlement: Was kann man brechen, wenn man nie e",a promise,1.0,1.0
+What gets wetter and wetter the more it dries?,A towel,A keyboard,"riddle: Was gewinns wetter und wetter,",a towel,1.0,1.0
+What can fill a room but takes up no space?,Light,A keyboard,riddle: What can fill a room but takes up no space?,a vacuum,0.6666666666666666,0.6666666666666666
+What gets bigger when you take away from it?,A hole,A keyboard,": Was nimmt größer, wenn man es nimmt?",a hole,1.0,1.0
+What can be broken without being touched?,A heart,A keyboard,riddle: Was kann gebrochen ohne rühren?,a promise,0.0,0.5
+"I am not alive, but I grow; I don't have lungs, but I need air; I don't have a mouth, but water kills me. What am I?",Fire,A keyboard,": I am not alive, but I grow; I don't have",fire,1.0,1.0
+What can fly without wings?,Time,A keyboard,: Was kann z Ohne wings?,a fly,0.0,0.0
+I'm always hungry; I must always be fed. The finger I touch will soon turn red. What am I?,Fire,A keyboard,: I'm always hungry; I must always be fed. The finger,fire,1.0,1.0
+What goes up but never comes down?,Your age,A keyboard,"riddle: Was steigt, aber nie fällt down?",your age,0.3333333333333333,0.7777777777777777
+"I'm full of holes, but I still hold water. What am I?",A sponge,A keyboard,": I'm full of holes, but I still hold water.",a sponge,1.0,1.0
+What can you break without touching it?,A promise,A keyboard,: Was can break without touching it?,a promise,1.0,1.0
+"What has a mouth but doesn't eat, has a bank but no money?",A river,A keyboard,"What has a mouth but doesn't eat, has a",a bank,0.6666666666666666,0.8333333333333334
+"I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?",A map,A keyboard,": I have cities, but no houses. I have mountains, but no",a map,1.0,1.0
